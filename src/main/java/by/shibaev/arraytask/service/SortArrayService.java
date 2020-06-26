@@ -80,6 +80,4 @@ public class SortArrayService {
         sortedArray.reverse();
         return sortedArray;
     }
-
-
 }

@@ -54,6 +54,38 @@ public class SearchArrayService {
         return min;
     }
 
+    public CustomArray calculateFibonacciNumbers(int maxVal) {
+        CustomArray fibonacciNumbers = new CustomArray(new int[]{0, 1});
+        int prev = 1;
+        int current = 1;
+        while (current <= maxVal) {
+            current += prev;
+            prev = current - prev;
+            fibonacciNumbers.add(current);
+        }
+        return fibonacciNumbers;
+    }
+
+    public CustomArray fibonacciNumbers(CustomArray array) throws CustomException {
+        ArrayValidator arrayValidator = new ArrayValidator();
+        int maxVal;
+        if (!arrayValidator.validateArray(array)) {
+            throw new CustomException();
+        }
+        CustomArray result = new CustomArray();
+        maxVal = array.getElement(maxValueIndex(array));
+        CustomArray fibonacciNumbers = calculateFibonacciNumbers(maxVal);
+        for (int i = 0; i < array.getLenght(); i++) {
+            for (int j = 0; j < fibonacciNumbers.getLenght(); j++) {
+                if (array.getElement(i) == fibonacciNumbers.getElement(j)) {
+                    result.add(array.getElement(i));
+                }
+            }
+        }
+
+        return result;
+    }
+
     public CustomArray specialNumbers(CustomArray array) throws CustomException {
         int i;
         int j;
@@ -66,7 +98,7 @@ public class SearchArrayService {
         CustomArray specialNumbers = new CustomArray();
         for (i = 0; i < array.getLenght(); i++) {
             number = Integer.toString(array.getElement(i));
-            if (number.length()!=3){
+            if (number.length() != 3) {
                 continue;
             }
             compareCycle:
@@ -106,6 +138,4 @@ public class SearchArrayService {
         }
         return primeNumbers;
     }
-
-
 }

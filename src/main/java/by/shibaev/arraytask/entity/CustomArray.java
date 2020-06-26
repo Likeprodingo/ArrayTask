@@ -8,7 +8,7 @@ import java.util.Arrays;
 public class CustomArray {
     private int[] array;
 
-    public CustomArray(){
+    public CustomArray() {
         array = new int[]{};
     }
 
@@ -34,15 +34,6 @@ public class CustomArray {
         this.array = new int[num];
     }
 
-    public void add(int element){
-        int[] newArray = new int[array.length+1];
-        for(int i = 0; i < array.length; i++){
-            newArray[i] = array[i];
-        }
-        newArray[array.length] = element;
-        array = newArray;
-    }
-
     public void setElement(int index, int value) throws CustomException {
         ArrayValidator arrayValidator = new ArrayValidator();
         if (!arrayValidator.trueIndex(index, array.length)) {
@@ -61,6 +52,15 @@ public class CustomArray {
             throw new CustomException();
         }
         return array[index];
+    }
+
+    public void add(int element) {
+        int[] newArray = new int[array.length + 1];
+        for (int i = 0; i < array.length; i++) {
+            newArray[i] = array[i];
+        }
+        newArray[array.length] = element;
+        array = newArray;
     }
 
     public void reverse() {
